@@ -93,6 +93,7 @@
             margin: 20px auto;
             border-collapse: collapse;
             width: 80%;
+            background-color: rgba(255, 255, 255, 0.9); /* Mais fosco */
         }
         th, td {
             border: 1px solid #ccc;
@@ -105,6 +106,8 @@
         .highlight {
             background-color: #28a745;
             color: white;
+            font-weight: bold;
+            text-transform: uppercase;
         }
         footer {
             margin-top: 30px;
@@ -281,12 +284,15 @@
             const tabela = document.getElementById("tabela-resultados");
             tabela.innerHTML = "";
 
+            let menorPreco = Math.min(...resultados.filter(r => typeof r.precoPorLitro === "number").map(r => r.precoPorLitro));
+
             resultados.forEach((resultado) => {
                 const row = document.createElement("tr");
+                const isHighlight = typeof resultado.precoPorLitro === "number" && resultado.precoPorLitro === menorPreco;
                 row.innerHTML = `
-                    <td>${resultado.pack}</td>
-                    <td>${typeof resultado.precoPorLitro === "number" ? `R$ ${resultado.precoPorLitro.toFixed(2)}` : resultado.precoPorLitro}</td>
-                    <td>${typeof resultado.valorTotal === "number" ? `R$ ${resultado.valorTotal.toFixed(2)}` : resultado.valorTotal}</td>
+                    <td ${isHighlight ? 'class="highlight"' : ''}>${resultado.pack}</td>
+                    <td ${isHighlight ? 'class="highlight"' : ''}>${typeof resultado.precoPorLitro === "number" ? `R$ ${resultado.precoPorLitro.toFixed(2)}` : resultado.precoPorLitro}</td>
+                    <td ${isHighlight ? 'class="highlight"' : ''}>${typeof resultado.valorTotal === "number" ? `R$ ${resultado.valorTotal.toFixed(2)}` : resultado.valorTotal}</td>
                 `;
                 tabela.appendChild(row);
             });
