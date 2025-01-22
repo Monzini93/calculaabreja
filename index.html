@@ -73,6 +73,29 @@
         h1 {
             color: orange;
         }
+
+        /* Rodapé */
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+        }
+
+        /* Media Queries para responsividade */
+        @media (max-width: 600px) {
+            .linha {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .campo {
+                margin: 10px 0;
+            }
+            table {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -165,6 +188,10 @@
         </thead>
         <tbody id="tabela-resultados"></tbody>
     </table>
+
+    <footer>
+        <p>Idealizado por Juliene Sales e desenvolvido por Yuri Monzini</p>
+    </footer>
 
     <script>
         function calcular() {
