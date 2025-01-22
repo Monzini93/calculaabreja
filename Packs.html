@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcula a Breja - Pack's</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(fundo.jpg);
+            background-size: cover; 
+            background-attachment: fixed; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .navbar a:hover {
+            background-color: orange;
+            color: white;
+        }
+        .container {
+            margin-top: 60px; /* Para evitar sobreposição com a barra de navegação */
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+        }
+        h1 {
+            color: orange;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .linha {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        .campo {
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .campo label {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        select, input {
+            padding: 5px;
+            font-size: 16px;
+        }
+        input[type="number"], input[type="text"] {
+            width: 120px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .highlight {
+            background-color: #28a745;
+            color: white;
+        }
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+            width: 100%;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .linha {
+                flex-direction: column;
+                align-items: center;
+            }
+            .campo {
+                margin: 10px 0;
+                align-items: center;
+                text-align: center;
+            }
+            table {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <div class="navbar">
+        <a href="index.html">Avulso</a>
+        <a href="Packs.html">Pack's</a>
+    </div>
+
+    <div class="container">
+        <h1>Calcula a Breja - Pack's</h1>
+        <h2>Comparador de Preço por Unidade</h2>
+
+        <!-- Formulário para inserir dados dos packs -->
+        <div class="linha">
+            <div class="campo">
+                <label for="quantidade1">Quantidade no Pack</label>
+                <input type="number" id="quantidade1" placeholder="Qtd. de unidades">
+            </div>
+            <div class="campo">
+                <label for="volume1">Volume de Cada Unidade</label>
+                <select id="volume1">
+                    <option value="269">269 ml</option>
+                    <option value="300">300 ml</option>
+                    <option value="350">350 ml</option>
+                    <option value="473">473 ml</option>
+                    <option value="550">550 ml</option>
+                    <option value="600">600 ml</option>
+                    <option value="1000">1 L</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label for="preco1">Preço por Unidade (R$)</label>
+                <input type="number" id="preco1" placeholder="Preço (R$)">
+            </div>
+        </div>
+
+        <div class="linha">
+            <div class="campo">
+                <label for="quantidade2">Quantidade no Pack</label>
+                <input type="number" id="quantidade2" placeholder="Qtd. de unidades">
+            </div>
+            <div class="campo">
+                <label for="volume2">Volume de Cada Unidade</label>
+                <select id="volume2">
+                    <option value="269">269 ml</option>
+                    <option value="300">300 ml</option>
+                    <option value="350">350 ml</option>
+                    <option value="473">473 ml</option>
+                    <option value="550">550 ml</option>
+                    <option value="600">600 ml</option>
+                    <option value="1000">1 L</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label for="preco2">Preço por Unidade (R$)</label>
+                <input type="number" id="preco2" placeholder="Preço (R$)">
+            </div>
+        </div>
+
+        <div class="linha">
+            <div class="campo">
+                <label for="quantidade3">Quantidade no Pack</label>
+                <input type="number" id="quantidade3" placeholder="Qtd. de unidades">
+            </div>
+            <div class="campo">
+                <label for="volume3">Volume de Cada Unidade</label>
+                <select id="volume3">
+                    <option value="269">269 ml</option>
+                    <option value="300">300 ml</option>
+                    <option value="350">350 ml</option>
+                    <option value="473">473 ml</option>
+                    <option value="550">550 ml</option>
+                    <option value="600">600 ml</option>
+                    <option value="1000">1 L</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label for="preco3">Preço por Unidade (R$)</label>
+                <input type="number" id="preco3" placeholder="Preço (R$)">
+            </div>
+        </div>
+
+        <button onclick="calcular()">Calcular</button>
+
+        <!-- Tabela de Resultados -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Pack</th>
+                    <th>Preço por Litro (R$)</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-resultados"></tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>Idealizado por Juliene Sales e desenvolvido por Yuri Monzini</p>
+    </footer>
+
+    <script>
+        function calcular() {
+            const dados = [
+                {
+                    quantidade: parseFloat(document.getElementById("quantidade1").value),
+                    volume: parseFloat(document.getElementById("volume1").value),
+                    preco: parseFloat(document.getElementById("preco1").value)
+                },
+                {
+                    quantidade: parseFloat(document.getElementById("quantidade2").value),
+                    volume: parseFloat(document.getElementById("volume2").value),
+                    preco: parseFloat(document.getElementById("preco2").value)
+                },
+                {
+                    quantidade: parseFloat(document.getElementById("quantidade3").value),
+                    volume: parseFloat(document.getElementById("volume3").value),
+                    preco: parseFloat(document.getElementById("preco3").value)
+                }
+            ];
+
+            const resultados = dados.map((pack, index) => {
+                if (isNaN(pack.quantidade) || isNaN(pack.volume) || isNaN(pack.preco) || pack.quantidade <= 0 || pack.volume <= 0 || pack.preco <= 0) {
+                    return { pack: `Pack ${index + 1}`, precoPorLitro: "Inválido" };
+                }
+                const precoPorLitro = (pack.preco / (pack.volume / 1000));
+                return { pack: `Pack ${index + 1}`, precoPorLitro };
+            });
+
+            const tabela = document.getElementById("tabela-resultados");
+            tabela.innerHTML = "";
+
+            resultados.forEach((resultado) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${resultado.pack}</td>
+                    <td>${typeof resultado.precoPorLitro === "number" ? `R$ ${resultado.precoPorLitro.toFixed(2)}` : resultado.precoPorLitro}</td>
+                `;
+                tabela.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>
