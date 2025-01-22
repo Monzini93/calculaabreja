@@ -56,7 +56,6 @@
         h2 {
             margin-bottom: 20px;
         }
-        /* Resto do CSS permanece o mesmo */
         .linha {
             display: flex;
             align-items: center;
@@ -112,7 +111,6 @@
             background-color: #28a745;
             color: white;
         }
-
         footer {
             margin-top: 30px;
             font-size: 14px;
@@ -122,26 +120,23 @@
             width: 100%;
             text-align: center;
         }
-
-        /* Media Queries para responsividade */
         @media (max-width: 600px) {
             .linha {
-                flex-direction: column; /* Exibe os elementos verticalmente */
-                align-items: center; /* Centraliza os itens */
+                flex-direction: column;
+                align-items: center;
             }
             .campo {
-                margin: 10px 0; /* Espaçamento vertical */
-                align-items: center; /* Centraliza os conteúdos */
-                text-align: center; /* Centraliza o texto dos labels */
+                margin: 10px 0;
+                align-items: center;
+                text-align: center;
             }
             table {
-                width: 100%; /* Tabela ocupa a largura total */
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Barra de Navegação -->
     <div class="navbar">
         <a href="index.html">Avulso</a>
         <a href="Packs.html">Pack's</a>
@@ -157,7 +152,6 @@
             <option value="l">1 litro</option>
         </select><br>
 
-        <!-- Linha Cerveja 1 com rótulos -->
         <div class="linha">
             <span class="nome-cerveja">Cerveja 1:</span>
             <div class="campo">
@@ -182,7 +176,48 @@
             </div>
         </div>
 
-        <!-- Restante do código da página -->
+        <div class="linha">
+            <span class="nome-cerveja">Cerveja 2:</span>
+            <div class="campo">
+                <select id="volume2">
+                    <option value="269">269 ml</option>
+                    <option value="300">300 ml</option>
+                    <option value="350">350 ml</option>
+                    <option value="473">473 ml</option>
+                    <option value="550">550 ml</option>
+                    <option value="600">600 ml</option>
+                    <option value="1000">1 L</option>
+                </select>
+            </div>
+            <div class="campo">
+                <input type="number" id="preco2" step="0.01" placeholder="Preço (R$)">
+            </div>
+            <div class="campo">
+                <input type="text" id="nome2" placeholder="Opcional">
+            </div>
+        </div>
+
+        <div class="linha">
+            <span class="nome-cerveja">Cerveja 3:</span>
+            <div class="campo">
+                <select id="volume3">
+                    <option value="269">269 ml</option>
+                    <option value="300">300 ml</option>
+                    <option value="350">350 ml</option>
+                    <option value="473">473 ml</option>
+                    <option value="550">550 ml</option>
+                    <option value="600">600 ml</option>
+                    <option value="1000">1 L</option>
+                </select>
+            </div>
+            <div class="campo">
+                <input type="number" id="preco3" step="0.01" placeholder="Preço (R$)">
+            </div>
+            <div class="campo">
+                <input type="text" id="nome3" placeholder="Opcional">
+            </div>
+        </div>
+
         <button onclick="calcular()">Calcular</button>
 
         <table>
@@ -247,10 +282,9 @@
             resultados.forEach((resultado, index) => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                        <td>${resultado.cerveja}</td>
-                        <td>${typeof resultado.precoPorUnidade === "number" ? `R$ ${resultado.precoPorUnidade.toFixed(2)}` : resultado.precoPorUnidade}</td>
-                    `;
-
+                    <td>${resultado.cerveja}</td>
+                    <td>${typeof resultado.precoPorUnidade === "number" ? `R$ ${resultado.precoPorUnidade.toFixed(2)}` : resultado.precoPorUnidade}</td>
+                `;
                 if (index === menorIndice) {
                     row.classList.add("highlight");
                 }
