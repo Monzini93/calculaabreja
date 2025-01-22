@@ -146,7 +146,15 @@
         <div class="linha">
             <span class="nome-cerveja">Pack 1:</span>            
             <div class="campo">
-                <input type="number" id="quantidade1" placeholder="Qtd. de unidades">
+                <select id="quantidade1">
+                    <option value="6">6 uni</option>
+                    <option value="8">8 uni</option>
+                    <option value="12">12 uni</option>
+                    <option value="15">15 uni</option>
+                    <option value="16">16 uni</option>
+                    <option value="18">18 uni</option>
+                    <option value="24">24 uni</option>
+                </select>
             </div>
             <div class="campo">
                 <select id="volume1">
@@ -167,7 +175,15 @@
         <div class="linha">
             <span class="nome-cerveja">Pack 2:</span>
             <div class="campo">
-                <input type="number" id="quantidade2" placeholder="Qtd. de unidades">
+                <select id="quantidade2">
+                    <option value="6">6 uni</option>
+                    <option value="8">8 uni</option>
+                    <option value="12">12 uni</option>
+                    <option value="15">15 uni</option>
+                    <option value="16">16 uni</option>
+                    <option value="18">18 uni</option>
+                    <option value="24">24 uni</option>
+                </select>
             </div>
             <div class="campo">
                 <select id="volume2">
@@ -187,9 +203,16 @@
 
         <div class="linha">
             <span class="nome-cerveja">Pack 3:</span>
-            
             <div class="campo">
-                <input type="number" id="quantidade3" placeholder="Qtd. de unidades">
+                <select id="quantidade3">
+                    <option value="6">6 uni</option>
+                    <option value="8">8 uni</option>
+                    <option value="12">12 uni</option>
+                    <option value="15">15 uni</option>
+                    <option value="16">16 uni</option>
+                    <option value="18">18 uni</option>
+                    <option value="24">24 uni</option>
+                </select>
             </div>
             <div class="campo">
                 <select id="volume3">
@@ -215,6 +238,7 @@
                 <tr>
                     <th>Pack</th>
                     <th>Preço por Litro (R$)</th>
+                    <th>Valor Total (R$)</th>
                 </tr>
             </thead>
             <tbody id="tabela-resultados"></tbody>
@@ -247,10 +271,11 @@
 
             const resultados = dados.map((pack, index) => {
                 if (isNaN(pack.quantidade) || isNaN(pack.volume) || isNaN(pack.preco) || pack.quantidade <= 0 || pack.volume <= 0 || pack.preco <= 0) {
-                    return { pack: `Pack ${index + 1}`, precoPorLitro: "Inválido" };
+                    return { pack: `Pack ${index + 1}`, precoPorLitro: "Inválido", valorTotal: "Inválido" };
                 }
                 const precoPorLitro = (pack.preco / (pack.volume / 1000));
-                return { pack: `Pack ${index + 1}`, precoPorLitro };
+                const valorTotal = pack.preco * pack.quantidade;
+                return { pack: `Pack ${index + 1}`, precoPorLitro, valorTotal };
             });
 
             const tabela = document.getElementById("tabela-resultados");
@@ -261,6 +286,7 @@
                 row.innerHTML = `
                     <td>${resultado.pack}</td>
                     <td>${typeof resultado.precoPorLitro === "number" ? `R$ ${resultado.precoPorLitro.toFixed(2)}` : resultado.precoPorLitro}</td>
+                    <td>${typeof resultado.valorTotal === "number" ? `R$ ${resultado.valorTotal.toFixed(2)}` : resultado.valorTotal}</td>
                 `;
                 tabela.appendChild(row);
             });
