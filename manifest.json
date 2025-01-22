@@ -1,7 +1,7 @@
 {
   "name": "Calcula a Breja",
-  "short_name": "CalculaBreja",
-  "start_url": "./",
+  "short_name": "Breja",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#28a745",
