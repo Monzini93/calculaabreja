@@ -15,12 +15,36 @@
             background-repeat: no-repeat; 
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             min-height: 100vh;
             margin: 0;
         }
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .navbar a:hover {
+            background-color: orange;
+            color: white;
+        }
         .container {
+            margin-top: 60px; /* Para evitar sobreposição com a barra de navegação */
             text-align: center;
             width: 100%;
             max-width: 800px;
@@ -32,6 +56,7 @@
         h2 {
             margin-bottom: 20px;
         }
+        /* Resto do CSS permanece o mesmo */
         .linha {
             display: flex;
             align-items: center;
@@ -116,6 +141,12 @@
     </style>
 </head>
 <body>
+    <!-- Barra de Navegação -->
+    <div class="navbar">
+        <a href="index.html">Avulso</a>
+        <a href="Packs.html">Pack's</a>
+    </div>
+
     <div class="container">
         <h1>Calcula a Breja</h1>
         <h2>Comparador de Preço por Litro</h2>
@@ -129,7 +160,8 @@
         <!-- Linha Cerveja 1 com rótulos -->
         <div class="linha">
             <span class="nome-cerveja">Cerveja 1:</span>
-            <div class="campo">                
+            <div class="campo">
+                <label for="volume1">Tamanho</label>
                 <select id="volume1">
                     <option value="269">269 ml</option>
                     <option value="300">300 ml</option>
@@ -141,57 +173,16 @@
                 </select>
             </div>
             <div class="campo">
+                <label for="preco1">Preço (R$)</label>
                 <input type="number" id="preco1" step="0.01" placeholder="Preço (R$)">
             </div>
-            <div class="campo">                
-                <input type="text" id="nome1" placeholder="Nome opcional">
+            <div class="campo">
+                <label for="nome1">Qual a cerveja</label>
+                <input type="text" id="nome1" placeholder="Opcional">
             </div>
         </div>
 
-        <!-- Linha Cerveja 2 -->
-        <div class="linha">
-            <span class="nome-cerveja">Cerveja 2:</span>
-            <div class="campo">
-                <select id="volume2">
-                    <option value="269">269 ml</option>
-                    <option value="300">300 ml</option>
-                    <option value="350">350 ml</option>
-                    <option value="473">473 ml</option>
-                    <option value="550">550 ml</option>
-                    <option value="600">600 ml</option>
-                    <option value="1000">1 L</option>
-                </select>
-            </div>
-            <div class="campo">
-                <input type="number" id="preco2" step="0.01" placeholder="Preço (R$)">
-            </div>
-            <div class="campo">
-                <input type="text" id="nome2" placeholder="Nome opcional">
-            </div>
-        </div>
-
-        <!-- Linha Cerveja 3 -->
-        <div class="linha">
-            <span class="nome-cerveja">Cerveja 3:</span>
-            <div class="campo">
-                <select id="volume3">
-                    <option value="269">269 ml</option>
-                    <option value="300">300 ml</option>
-                    <option value="350">350 ml</option>
-                    <option value="473">473 ml</option>
-                    <option value="550">550 ml</option>
-                    <option value="600">600 ml</option>
-                    <option value="1000">1 L</option>
-                </select>
-            </div>
-            <div class="campo">
-                <input type="number" id="preco3" step="0.01" placeholder="Preço (R$)">
-            </div>
-            <div class="campo">
-                <input type="text" id="nome3" placeholder="Nome opcional">
-            </div>
-        </div>
-
+        <!-- Restante do código da página -->
         <button onclick="calcular()">Calcular</button>
 
         <table>
