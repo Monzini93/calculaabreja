@@ -157,22 +157,18 @@
     </div>
 
     <div class="container">
-        <h1>Calcula a Breja - Pack's</h1>
-        <h2>Comparador de Preço por Unidade</h2>
-
-        <!-- Formulário para inserir dados dos packs -->
-        <div class="linha">         
-            <div class="campo">
-                <select id="quantidade1">
-                    <option value="6">6 uni</option>
-                    <option value="8">8 uni</option>
-                    <option value="12">12 uni</option>
-                    <option value="15">15 uni</option>
-                    <option value="16">16 uni</option>
-                    <option value="18">18 uni</option>
-                    <option value="24">24 uni</option>
-                </select>
-            </div>
+        <h1>Calcula a Breja</h1>
+        <h2>Comparador de Preço por Litro</h2>
+    
+        <label for="calculo">Calcular por:</label>
+        <select id="calculo">
+            <option value="ml">100 ml</option>
+            <option value="l">1 litro</option>
+        </select><br>
+    
+        <!-- Linha 1 -->
+        <h3>Pack 1</h3>
+        <div class="linha">
             <div class="campo">
                 <select id="volume1">
                     <option value="269">269 ml</option>
@@ -185,22 +181,16 @@
                 </select>
             </div>
             <div class="campo">
-                <input type="number" id="preco1" placeholder="Valor unidade">
+                <input type="number" id="preco1" step="0.01" placeholder="Preço (R$)">
+            </div>
+            <div class="campo">
+                <input type="text" id="nome1" placeholder="Nome opcional">
             </div>
         </div>
-
+    
+        <!-- Linha 2 -->
+        <h3>Pack 2</h3>
         <div class="linha">
-            <div class="campo">
-                <select id="quantidade2">
-                    <option value="6">6 uni</option>
-                    <option value="8">8 uni</option>
-                    <option value="12">12 uni</option>
-                    <option value="15">15 uni</option>
-                    <option value="16">16 uni</option>
-                    <option value="18">18 uni</option>
-                    <option value="24">24 uni</option>
-                </select>
-            </div>
             <div class="campo">
                 <select id="volume2">
                     <option value="269">269 ml</option>
@@ -213,22 +203,16 @@
                 </select>
             </div>
             <div class="campo">
-                <input type="number" id="preco2" placeholder="Valor unidade">
+                <input type="number" id="preco2" step="0.01" placeholder="Preço (R$)">
+            </div>
+            <div class="campo">
+                <input type="text" id="nome2" placeholder="Nome opcional">
             </div>
         </div>
-
+    
+        <!-- Linha 3 -->
+        <h3>Pack 3</h3>
         <div class="linha">
-            <div class="campo">
-                <select id="quantidade3">
-                    <option value="6">6 uni</option>
-                    <option value="8">8 uni</option>
-                    <option value="12">12 uni</option>
-                    <option value="15">15 uni</option>
-                    <option value="16">16 uni</option>
-                    <option value="18">18 uni</option>
-                    <option value="24">24 uni</option>
-                </select>
-            </div>
             <div class="campo">
                 <select id="volume3">
                     <option value="269">269 ml</option>
@@ -241,10 +225,13 @@
                 </select>
             </div>
             <div class="campo">
-                <input type="number" id="preco3" placeholder="Valor unidade">
+                <input type="number" id="preco3" step="0.01" placeholder="Preço (R$)">
+            </div>
+            <div class="campo">
+                <input type="text" id="nome3" placeholder="Nome opcional">
             </div>
         </div>
-
+    
         <button onclick="calcular()">Calcular</button>
 
         <!-- Tabela de Resultados -->
