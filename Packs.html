@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcula a Breja</title>
-    <link rel="manifest" href="https://calculaabreja.vercel.app/manifest.json">
+    <title>Calcula a Breja - Pack's</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,25 +52,25 @@
         h1 {
             color: orange;
         }
-        h2, h3 {
+        h2 {
             margin-bottom: 20px;
-           /* font-weight: bold; */
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 5px;
-            border-radius: 5px;
-            color: #333; 
         }
         .linha {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 5px 0;
+            margin: 10px 0;
+            flex-wrap: wrap;
         }
         .campo {
             margin: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+        .campo label {
+            font-size: 14px;
+            margin-bottom: 5px;
         }
         select, input {
             padding: 5px;
@@ -94,6 +93,7 @@
             margin: 20px auto;
             border-collapse: collapse;
             width: 80%;
+            background-color: rgba(255, 255, 255, 0.9); /* Mais fosco */
         }
         th, td {
             border: 1px solid #ccc;
@@ -104,9 +104,10 @@
             background-color: #f4f4f4;
         }
         .highlight {
-            background-color: rgba(40, 167, 69, 0.8); /* Tarja verde fosca */
+            background-color: #28a745;
             color: white;
             font-weight: bold;
+            text-transform: uppercase;
         }
         footer {
             margin-top: 30px;
@@ -117,27 +118,55 @@
             width: 100%;
             text-align: center;
         }
+        /*@media (max-width: 600px) {
+            .linha {
+                flex-direction: column;
+                align-items: center;
+            }
+            .campo {
+                margin: 10px 0;
+                align-items: center;
+                text-align: center;
+            }
+            table {
+                width: 100%;
+            }
+        }*/
+        .nome-cerveja {
+                margin-right: 10px;
+                font-size: 16px;
+                font-weight: bold;
+                background-color: rgba(255, 255, 255, 0.7); /* fundo suave para contraste */
+                padding: 5px;
+                border-radius: 5px;
+                color: #333; /* cor escura para o texto */
+            }
     </style>
 </head>
 <body>
+    <!-- Barra de Navegação -->
     <div class="navbar">
         <a href="index.html">Unidade</a>
         <a href="Packs.html">Pack's</a>
     </div>
 
     <div class="container">
-        <h1>Calcula a Breja</h1>
-        <h2>Comparador de Preço por Litro</h2>
+        <h1>Calcula a Breja - Pack's</h1>
+        <h2>Comparador de Preço por Unidade</h2>
 
-        <label for="calculo">Calcular por:</label>
-        <select id="calculo">
-            <option value="ml">100 ml</option>
-            <option value="l">1 litro</option>
-        </select><br>
-
-        <!-- Linha 1 -->
-        <h3>Pack 1</h3>
-        <div class="linha">
+        <!-- Formulário para inserir dados dos packs -->
+        <div class="linha">         
+            <div class="campo">
+                <select id="quantidade1">
+                    <option value="6">6 uni</option>
+                    <option value="8">8 uni</option>
+                    <option value="12">12 uni</option>
+                    <option value="15">15 uni</option>
+                    <option value="16">16 uni</option>
+                    <option value="18">18 uni</option>
+                    <option value="24">24 uni</option>
+                </select>
+            </div>
             <div class="campo">
                 <select id="volume1">
                     <option value="269">269 ml</option>
@@ -150,16 +179,22 @@
                 </select>
             </div>
             <div class="campo">
-                <input type="number" id="preco1" step="0.01" placeholder="Preço (R$)">
-            </div>
-            <div class="campo">
-                <input type="text" id="nome1" placeholder="Nome opcional">
+                <input type="number" id="preco1" placeholder="Preço uni (R$)">
             </div>
         </div>
 
-        <!-- Linha 2 -->
-        <h3>Pack 2</h3>
         <div class="linha">
+            <div class="campo">
+                <select id="quantidade2">
+                    <option value="6">6 uni</option>
+                    <option value="8">8 uni</option>
+                    <option value="12">12 uni</option>
+                    <option value="15">15 uni</option>
+                    <option value="16">16 uni</option>
+                    <option value="18">18 uni</option>
+                    <option value="24">24 uni</option>
+                </select>
+            </div>
             <div class="campo">
                 <select id="volume2">
                     <option value="269">269 ml</option>
@@ -172,16 +207,22 @@
                 </select>
             </div>
             <div class="campo">
-                <input type="number" id="preco2" step="0.01" placeholder="Preço (R$)">
-            </div>
-            <div class="campo">
-                <input type="text" id="nome2" placeholder="Nome opcional">
+                <input type="number" id="preco2" placeholder="Preço uni (R$)">
             </div>
         </div>
 
-        <!-- Linha 3 -->
-        <h3>Pack 3</h3>
         <div class="linha">
+            <div class="campo">
+                <select id="quantidade3">
+                    <option value="6">6 uni</option>
+                    <option value="8">8 uni</option>
+                    <option value="12">12 uni</option>
+                    <option value="15">15 uni</option>
+                    <option value="16">16 uni</option>
+                    <option value="18">18 uni</option>
+                    <option value="24">24 uni</option>
+                </select>
+            </div>
             <div class="campo">
                 <select id="volume3">
                     <option value="269">269 ml</option>
@@ -194,20 +235,19 @@
                 </select>
             </div>
             <div class="campo">
-                <input type="number" id="preco3" step="0.01" placeholder="Preço (R$)">
-            </div>
-            <div class="campo">
-                <input type="text" id="nome3" placeholder="Nome opcional">
+                <input type="number" id="preco3" placeholder="Preço uni (R$)">
             </div>
         </div>
 
         <button onclick="calcular()">Calcular</button>
 
+        <!-- Tabela de Resultados -->
         <table>
             <thead>
                 <tr>
-                    <th>Cerveja</th>
-                    <th>Preço por Unidade Escolhida (R$)</th>
+                    <th>Pack</th>
+                    <th>Preço por Litro (R$)</th>
+                    <th>Valor Pack (R$)</th>
                 </tr>
             </thead>
             <tbody id="tabela-resultados"></tbody>
@@ -220,57 +260,46 @@
 
     <script>
         function calcular() {
-            const precos = [
-                parseFloat(document.getElementById("preco1").value),
-                parseFloat(document.getElementById("preco2").value),
-                parseFloat(document.getElementById("preco3").value)
-            ];
-            const volumes = [
-                parseFloat(document.getElementById("volume1").value),
-                parseFloat(document.getElementById("volume2").value),
-                parseFloat(document.getElementById("volume3").value)
-            ];
-            const nomes = [
-                document.getElementById("nome1").value || "Cerveja 1",
-                document.getElementById("nome2").value || "Cerveja 2",
-                document.getElementById("nome3").value || "Cerveja 3"
-            ];
-            const tipoCalculo = document.getElementById("calculo").value;
-
-            const resultados = [];
-            for (let i = 0; i < 3; i++) {
-                if (isNaN(precos[i]) || precos[i] <= 0 || isNaN(volumes[i]) || volumes[i] <= 0) {
-                    resultados.push({ cerveja: nomes[i], precoPorUnidade: "Inválido" });
-                    continue;
+            const dados = [
+                {
+                    quantidade: parseFloat(document.getElementById("quantidade1").value),
+                    volume: parseFloat(document.getElementById("volume1").value),
+                    preco: parseFloat(document.getElementById("preco1").value)
+                },
+                {
+                    quantidade: parseFloat(document.getElementById("quantidade2").value),
+                    volume: parseFloat(document.getElementById("volume2").value),
+                    preco: parseFloat(document.getElementById("preco2").value)
+                },
+                {
+                    quantidade: parseFloat(document.getElementById("quantidade3").value),
+                    volume: parseFloat(document.getElementById("volume3").value),
+                    preco: parseFloat(document.getElementById("preco3").value)
                 }
+            ];
 
-                let precoPorUnidade = tipoCalculo === "ml"
-                    ? precos[i] / (volumes[i] / 100)
-                    : precos[i] / (volumes[i] / 1000);
-
-                resultados.push({ cerveja: nomes[i], precoPorUnidade });
-            }
-
-            let menorPreco = Infinity;
-            let menorIndice = -1;
-            for (let i = 0; i < resultados.length; i++) {
-                if (typeof resultados[i].precoPorUnidade === "number" && resultados[i].precoPorUnidade < menorPreco) {
-                    menorPreco = resultados[i].precoPorUnidade;
-                    menorIndice = i;
+            const resultados = dados.map((pack, index) => {
+                if (isNaN(pack.quantidade) || isNaN(pack.volume) || isNaN(pack.preco) || pack.quantidade <= 0 || pack.volume <= 0 || pack.preco <= 0) {
+                    return { pack: `Pack ${index + 1}`, precoPorLitro: "Inválido", valorTotal: "Inválido" };
                 }
-            }
+                const precoPorLitro = (pack.preco / (pack.volume / 1000));
+                const valorTotal = pack.preco * pack.quantidade;
+                return { pack: `Pack ${index + 1}`, precoPorLitro, valorTotal };
+            });
 
             const tabela = document.getElementById("tabela-resultados");
             tabela.innerHTML = "";
-            resultados.forEach((resultado, index) => {
+
+            let menorPreco = Math.min(...resultados.filter(r => typeof r.precoPorLitro === "number").map(r => r.precoPorLitro));
+
+            resultados.forEach((resultado) => {
                 const row = document.createElement("tr");
+                const isHighlight = typeof resultado.precoPorLitro === "number" && resultado.precoPorLitro === menorPreco;
                 row.innerHTML = `
-                    <td>${resultado.cerveja}</td>
-                    <td>${typeof resultado.precoPorUnidade === "number" ? `R$ ${resultado.precoPorUnidade.toFixed(2)}` : resultado.precoPorUnidade}</td>
+                    <td ${isHighlight ? 'class="highlight"' : ''}>${resultado.pack}</td>
+                    <td ${isHighlight ? 'class="highlight"' : ''}>${typeof resultado.precoPorLitro === "number" ? `R$ ${resultado.precoPorLitro.toFixed(2)}` : resultado.precoPorLitro}</td>
+                    <td ${isHighlight ? 'class="highlight"' : ''}>${typeof resultado.valorTotal === "number" ? `R$ ${resultado.valorTotal.toFixed(2)}` : resultado.valorTotal}</td>
                 `;
-                if (index === menorIndice) {
-                    row.classList.add("highlight");
-                }
                 tabela.appendChild(row);
             });
         }
