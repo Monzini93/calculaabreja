@@ -5,5 +5,9 @@
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#28a745",
-  "description": "Comparador de preço por litro de cerveja"
+  "description": "Comparador de preço por litro de cerveja",
+  "related_applications": [
+    {
+      "platform": "web"
+    }
 }
