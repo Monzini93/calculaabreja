@@ -22,14 +22,14 @@
   "screenshots": [
     {
       "src": "screenshots/screenshot-mobile.png",
-      "sizes": "540x720",
+      "sizes": "402x887",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Calculadora de Preço por Unidade"
     },
     {
       "src": "screenshots/screenshot-desktop.png",
-      "sizes": "1024x768",
+      "sizes": "1280x675",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Comparador de Preços de Cerveja"
