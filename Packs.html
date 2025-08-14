@@ -183,9 +183,12 @@
                 width: 100%;
             }
             
-            /* Transforma a tabela em "Cards" */
-            table thead {
-                display: none; /* Esconde o cabeçalho original */
+            /* A SEÇÃO ABAIXO FOI REMOVIDA PARA CORRIGIR A TABELA NO CELULAR.
+               Ela transformava a tabela em "cards", mas escondia os dados.
+               Agora, a tabela normal será usada, que se adapta melhor.
+            */
+            /* table thead {
+                display: none;
             }
 
             table, tbody, tr, td {
@@ -201,15 +204,15 @@
             }
             
             td {
-                text-align: right; /* Alinha o valor à direita */
-                padding-left: 50%; /* Deixa espaço para o label */
+                text-align: right;
+                padding-left: 50%;
                 position: relative;
                 border: none;
                 border-bottom: 1px solid #eee;
             }
             
             td::before {
-                content: attr(data-label); /* Pega o texto do atributo data-label */
+                content: attr(data-label);
                 position: absolute;
                 left: 10px;
                 width: calc(50% - 20px);
@@ -217,6 +220,7 @@
                 text-align: left;
                 font-weight: bold;
             }
+            */
         }
     </style>
 </head>
@@ -265,7 +269,7 @@
             <div class="campo">
                 <label>Pack 2: Quantidade</label>
                 <select class="quantidade-input">
-                     <option value="6">6 unidades</option>
+                    <option value="6">6 unidades</option>
                     <option value="8">8 unidades</option>
                     <option value="12" selected>12 unidades</option>
                     <option value="15">15 unidades</option>
@@ -296,7 +300,7 @@
             <div class="campo">
                 <label>Pack 3: Quantidade</label>
                 <select class="quantidade-input">
-                     <option value="6">6 unidades</option>
+                    <option value="6">6 unidades</option>
                     <option value="8">8 unidades</option>
                     <option value="12" selected>12 unidades</option>
                     <option value="15">15 unidades</option>
