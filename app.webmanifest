@@ -1,14 +1,22 @@
 {
   "name": "Calcula a Breja",
-  "short_name": "Breja",
-  "start_url": "/",
+  "short_name": "CalculaBreja",
+  "description": "Calculadora para descobrir a cerveja mais barata.",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#28a745",
-  "description": "Comparador de preço por litro de cerveja",
-  "related_applications": [
+  "theme_color": "#0d6efd",
+  "orientation": "portrait-primary",
+  "icons": [
     {
-      "platform": "web"
+      "src": "img/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ]
 }
