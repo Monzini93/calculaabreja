@@ -4,10 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calcula a Breja - Unidade</title>
+
+    <!--
+      ================================================
+      INFORMAÇÕES PRINCIPAIS DO PWA (PROGRESSIVE WEB APP)
+      ================================================
+    -->
+    <!-- Descrição do App -->
+    <meta name="description" content="Calculadora para descobrir a cerveja mais barata por unidade ou por pack.">
+    
+    <!-- Cor da barra de status no celular (peguei o laranja do seu CSS) -->
+    <meta name="theme-color" content="#ff9800">
+    
+    <!-- Link para o manifesto do app -->
+    <link rel="manifest" href="manifest.json">
+
+    <!--
+      ================================================
+      ÍCONES
+      ================================================
+    -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    
+    <!--
+      ================================================
+      CSS ESTILOS
+      ================================================
+    -->
     <style>
         :root {
             --primary-color: #ff9800; /* Laranja */
@@ -334,60 +359,7 @@
         <p>Idealizado por Juliene Sales e desenvolvido por Yuri Monzini</p>
     </footer>
 
-    <script>
-        function calcular() {
-            const forms = document.querySelectorAll('.cerveja-form');
-            const tipoCalculo = parseFloat(document.getElementById("calculo").value);
-            const resultados = [];
-
-            // Atualiza o cabeçalho da tabela
-            const thPreco = document.getElementById('th-preco-calculado');
-            thPreco.textContent = `Preço por ${tipoCalculo === 1000 ? 'Litro' : tipoCalculo + 'ml'} (R$)`;
-
-            forms.forEach((form, index) => {
-                const preco = parseFloat(form.querySelector(".preco-input").value);
-                const volume = parseFloat(form.querySelector(".volume-input").value);
-                const nome = form.querySelector(".nome-input").value || `Cerveja ${index + 1}`;
-
-                if (isNaN(preco) || preco <= 0 || isNaN(volume) || volume <= 0) {
-                    resultados.push({ nome: nome, precoCalculado: "Inválido" });
-                    return;
-                }
-
-                const precoCalculado = (preco / volume) * tipoCalculo;
-                resultados.push({ nome, precoCalculado });
-            });
-
-            const precosValidos = resultados
-                .filter(r => typeof r.precoCalculado === "number")
-                .map(r => r.precoCalculado);
-
-            const menorPreco = precosValidos.length > 0 ? Math.min(...precosValidos) : Infinity;
-            
-            const tabelaBody = document.getElementById("tabela-resultados");
-            tabelaBody.innerHTML = "";
-
-            resultados.forEach(resultado => {
-                const row = document.createElement("tr");
-                const isHighlight = typeof resultado.precoCalculado === "number" && resultado.precoCalculado.toFixed(4) === menorPreco.toFixed(4);
-
-                if (isHighlight && menorPreco !== Infinity) {
-                    row.classList.add("highlight");
-                }
-                
-                // Adiciona o atributo data-label dinamicamente para a visualização mobile
-                const labelPreco = `Preço por ${tipoCalculo === 1000 ? 'Litro' : tipoCalculo + 'ml'}`;
-
-                row.innerHTML = `
-                    <td data-label="Cerveja">${resultado.nome}</td>
-                    <td data-label="${labelPreco}">${typeof resultado.precoCalculado === 'number' ? `R$ ${resultado.precoCalculado.toFixed(2)}` : resultado.precoCalculado}</td>
-                `;
-                tabelaBody.appendChild(row);
-            });
-        }
-        
-        // Chama a função calcular ao carregar a página para inicializar a tabela com os valores padrão
-        window.onload = calcular;
-    </script>
+    <!-- Chama o arquivo JavaScript externo -->
+    <script src="script.js"></script>
 </body>
 </html>
