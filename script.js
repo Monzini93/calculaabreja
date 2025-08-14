@@ -1,16 +1,24 @@
-// SEU CÓDIGO DE CÁLCULO QUE VOCÊ JÁ TINHA
 function calcular() {
     const forms = document.querySelectorAll('.cerveja-form');
     const tipoCalculo = parseFloat(document.getElementById("calculo").value);
     const resultados = [];
 
-    // Atualiza o cabeçalho da tabela
     const thPreco = document.getElementById('th-preco-calculado');
     thPreco.textContent = `Preço por ${tipoCalculo === 1000 ? 'Litro' : tipoCalculo + 'ml'} (R$)`;
 
     forms.forEach((form, index) => {
+        const volumeSelect = form.querySelector(".volume-input");
+        let volume;
+
+        // Verifica se a opção "Outro" foi selecionada
+        if (volumeSelect.value === 'outro') {
+            const customVolumeInput = form.querySelector(".volume-custom-input");
+            volume = parseFloat(customVolumeInput.value);
+        } else {
+            volume = parseFloat(volumeSelect.value);
+        }
+        
         const preco = parseFloat(form.querySelector(".preco-input").value);
-        const volume = parseFloat(form.querySelector(".volume-input").value);
         const nome = form.querySelector(".nome-input").value || `Cerveja ${index + 1}`;
 
         if (isNaN(preco) || preco <= 0 || isNaN(volume) || volume <= 0) {
@@ -39,7 +47,6 @@ function calcular() {
             row.classList.add("highlight");
         }
         
-        // Adiciona o atributo data-label dinamicamente para a visualização mobile
         const labelPreco = `Preço por ${tipoCalculo === 1000 ? 'Litro' : tipoCalculo + 'ml'}`;
 
         row.innerHTML = `
@@ -50,20 +57,35 @@ function calcular() {
     });
 }
 
-// Chama a função calcular ao carregar a página para inicializar a tabela com os valores padrão
-window.onload = calcular;
+// Adiciona os listeners depois que o DOM carregar
+document.addEventListener('DOMContentLoaded', () => {
+    // Listener para os seletores de volume
+    document.querySelectorAll('.volume-input').forEach(selectElement => {
+        selectElement.addEventListener('change', (event) => {
+            // Encontra o input customizado correspondente dentro do mesmo form
+            const form = event.target.closest('.cerveja-form');
+            const customInput = form.querySelector('.volume-custom-input');
+            
+            if (event.target.value === 'outro') {
+                customInput.style.display = 'block';
+                customInput.focus();
+            } else {
+                customInput.style.display = 'none';
+            }
+        });
+    });
+
+    // Chama a função calcular ao carregar a página para inicializar a tabela
+    calcular();
+});
 
 
-// =========================================================
-// CÓDIGO DE REGISTRO DO SERVICE WORKER (ADICIONAR ESTE BLOCO)
-// =========================================================
+// REGISTRO DO SERVICE WORKER
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/sw.js').then(function(registration) {
-      // Registro foi bem-sucedido
       console.log('Service Worker registrado com sucesso no escopo: ', registration.scope);
     }).catch(function(err) {
-      // Registro falhou
       console.log('Registro do Service Worker falhou: ', err);
     });
   });
