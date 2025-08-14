@@ -22,7 +22,7 @@
   "screenshots": [
     {
       "src": "screenshots/screenshot-mobile.png",
-      "sizes": "402x887",
+      "sizes": "407x882",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Calculadora de Preço por Unidade"
