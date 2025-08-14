@@ -257,7 +257,9 @@
                     <option value="550">550 ml</option>
                     <option value="600">600 ml</option>
                     <option value="1000">1 L</option>
+                    <option value="outro">Outro...</option>
                 </select>
+                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display: none; margin-top: 5px;">
             </div>
             <div class="campo">
                 <label>Preço por Unidade (R$)</label>
@@ -288,7 +290,9 @@
                     <option value="550">550 ml</option>
                     <option value="600">600 ml</option>
                     <option value="1000">1 L</option>
+                    <option value="outro">Outro...</option>
                 </select>
+                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display: none; margin-top: 5px;">
             </div>
             <div class="campo">
                 <label>Preço por Unidade (R$)</label>
@@ -319,7 +323,9 @@
                     <option value="550">550 ml</option>
                     <option value="600">600 ml</option>
                     <option value="1000">1 L</option>
+                    <option value="outro">Outro...</option>
                 </select>
+                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display: none; margin-top: 5px;">
             </div>
             <div class="campo">
                 <label>Preço por Unidade (R$)</label>
@@ -350,20 +356,26 @@
             const packForms = document.querySelectorAll(".pack-form");
             const resultados = [];
             
-            // Coleta os dados de cada formulário de pack
             packForms.forEach((form, index) => {
                 const quantidade = parseFloat(form.querySelector(".quantidade-input").value);
-                const volume = parseFloat(form.querySelector(".volume-input").value);
+                const volumeSelect = form.querySelector(".volume-input");
+                let volume;
+
+                if (volumeSelect.value === 'outro') {
+                    const customVolumeInput = form.querySelector(".volume-custom-input");
+                    volume = parseFloat(customVolumeInput.value);
+                } else {
+                    volume = parseFloat(volumeSelect.value);
+                }
+
                 const precoUnidade = parseFloat(form.querySelector(".preco-input").value);
 
-                if (isNaN(precoUnidade) || precoUnidade <= 0) {
+                if (isNaN(precoUnidade) || precoUnidade <= 0 || isNaN(volume) || volume <= 0) {
                     resultados.push({ pack: `Pack ${index + 1}`, precoPorLitro: "Inválido", valorTotal: "Inválido" });
                     return;
                 }
                 
-                // Calcula o preço por litro com base no preço da unidade
                 const precoPorLitro = (precoUnidade / volume) * 1000;
-                // Calcula o valor total do pack
                 const valorTotal = precoUnidade * quantidade;
                 
                 resultados.push({
@@ -373,16 +385,14 @@
                 });
             });
 
-            // Encontra o menor preço por litro entre os resultados válidos
             const precosValidos = resultados
                 .filter(r => typeof r.precoPorLitro === "number")
                 .map(r => r.precoPorLitro);
             
             const menorPreco = precosValidos.length > 0 ? Math.min(...precosValidos) : Infinity;
 
-            // Exibe os resultados na tabela
             const tabelaBody = document.getElementById("tabela-resultados");
-            tabelaBody.innerHTML = ""; // Limpa a tabela anterior
+            tabelaBody.innerHTML = "";
 
             resultados.forEach(resultado => {
                 const row = document.createElement("tr");
@@ -392,7 +402,6 @@
                     row.classList.add("highlight");
                 }
 
-                // Usamos atributos data-label para a versão mobile
                 row.innerHTML = `
                     <td data-label="Pack">${resultado.pack}</td>
                     <td data-label="Preço por Litro">${typeof resultado.precoPorLitro === "number" ? `R$ ${resultado.precoPorLitro.toFixed(2)}` : resultado.precoPorLitro}</td>
@@ -401,6 +410,23 @@
                 tabelaBody.appendChild(row);
             });
         }
+
+        // Adiciona os listeners para os seletores de volume
+        document.querySelectorAll('.volume-input').forEach(selectElement => {
+            selectElement.addEventListener('change', (event) => {
+                const form = event.target.closest('.pack-form');
+                const customInput = form.querySelector('.volume-custom-input');
+                if (event.target.value === 'outro') {
+                    customInput.style.display = 'block';
+                    customInput.focus();
+                } else {
+                    customInput.style.display = 'none';
+                }
+            });
+        });
+
+        // Chama o cálculo inicial ao carregar a página
+        window.onload = calcular;
     </script>
 </body>
 </html>
