@@ -10,13 +10,8 @@
       INFORMAÇÕES PRINCIPAIS DO PWA (PROGRESSIVE WEB APP)
       ================================================
     -->
-    <!-- Descrição do App -->
     <meta name="description" content="Calculadora para descobrir a cerveja mais barata por unidade ou por pack.">
-    
-    <!-- Cor da barra de status no celular (peguei o laranja do seu CSS) -->
     <meta name="theme-color" content="#ff9800">
-    
-    <!-- Link para o manifesto do app -->
     <link rel="manifest" href="manifest.json">
 
     <!--
@@ -132,8 +127,8 @@
             flex-direction: column;
             align-items: flex-start;
             gap: 5px;
-            flex: 1; /* Permite que os campos cresçam igualmente */
-            min-width: 150px; /* Largura mínima para evitar quebra em telas médias */
+            flex: 1;
+            min-width: 150px;
         }
 
         .campo label {
@@ -193,7 +188,7 @@
         }
 
         footer {
-            margin-top: auto; /* Empurra o rodapé para baixo */
+            margin-top: auto;
             font-size: 14px;
             color: white;
             background-color: rgba(0, 0, 0, 0.7);
@@ -218,8 +213,11 @@
                 align-items: stretch;
             }
             
-            /* Transforma a tabela em "Cards" */
-            table thead {
+            /* A SEÇÃO ABAIXO FOI REMOVIDA PARA CORRIGIR A TABELA NO CELULAR.
+               Ela transformava a tabela em "cards", mas escondia os dados.
+               Agora, a tabela normal será usada, que se adapta melhor.
+            */
+            /* table thead {
                 display: none;
             }
 
@@ -252,6 +250,7 @@
                 text-align: left;
                 font-weight: bold;
             }
+            */
         }
     </style>
 </head>
