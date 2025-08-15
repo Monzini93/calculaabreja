@@ -1,8 +1,7 @@
 // Define um nome e versão para o nosso cache. Mudar a versão força a atualização.
-const CACHE_NAME = 'calcula-breja-v2';
+const CACHE_NAME = 'calcula-breja-v3';
 
 // Lista de arquivos essenciais que o Service Worker deve armazenar em cache.
-// Removi o 'style.css' e adicionei a página 'Packs.html' e os favicons.
 const urlsToCache = [
   '/',
   '/index.html',
