@@ -109,7 +109,7 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             width: 100%;
-            box-sizing: border-box; /* Garante que padding não afete a largura total */
+            box-sizing: border-box;
         }
         
         button {
@@ -154,7 +154,7 @@
         }
 
         footer {
-            margin-top: auto; /* Empurra o rodapé para baixo */
+            margin-top: auto;
             font-size: 14px;
             color: white;
             background-color: rgba(0, 0, 0, 0.7);
@@ -163,10 +163,9 @@
             text-align: center;
         }
 
-        /* --- Media Query para Responsividade --- */
         @media (max-width: 768px) {
             body {
-                padding-top: 70px; /* Ajuste para navbar */
+                padding-top: 70px;
             }
 
             .container {
@@ -176,51 +175,12 @@
             
             .pack-form {
                 flex-direction: column;
-                align-items: stretch; /* Faz os itens ocuparem a largura toda */
+                align-items: stretch;
             }
             
             .campo {
                 width: 100%;
             }
-            
-            /* A SEÇÃO ABAIXO FOI REMOVIDA PARA CORRIGIR A TABELA NO CELULAR.
-               Ela transformava a tabela em "cards", mas escondia os dados.
-               Agora, a tabela normal será usada, que se adapta melhor.
-            */
-            /* table thead {
-                display: none;
-            }
-
-            table, tbody, tr, td {
-                display: block;
-                width: 100%;
-            }
-
-            tr {
-                margin-bottom: 15px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                overflow: hidden;
-            }
-            
-            td {
-                text-align: right;
-                padding-left: 50%;
-                position: relative;
-                border: none;
-                border-bottom: 1px solid #eee;
-            }
-            
-            td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 10px;
-                width: calc(50% - 20px);
-                padding-right: 10px;
-                text-align: left;
-                font-weight: bold;
-            }
-            */
         }
     </style>
 </head>
@@ -234,6 +194,7 @@
         <h1>Calcula a Breja</h1>
         <h2>Comparador de Preço por Pack</h2>
 
+        <!-- PACK 1 -->
         <div class="pack-form">
             <div class="campo">
                 <label>Pack 1: Quantidade</label>
@@ -245,7 +206,9 @@
                     <option value="16">16 unidades</option>
                     <option value="18">18 unidades</option>
                     <option value="24">24 unidades</option>
+                    <option value="outro">Outro...</option>
                 </select>
+                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display: none; margin-top: 5px;">
             </div>
             <div class="campo">
                 <label>Volume (ml)</label>
@@ -267,6 +230,7 @@
             </div>
         </div>
 
+        <!-- PACK 2 -->
         <div class="pack-form">
             <div class="campo">
                 <label>Pack 2: Quantidade</label>
@@ -278,7 +242,9 @@
                     <option value="16">16 unidades</option>
                     <option value="18">18 unidades</option>
                     <option value="24">24 unidades</option>
+                    <option value="outro">Outro...</option>
                 </select>
+                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display: none; margin-top: 5px;">
             </div>
             <div class="campo">
                 <label>Volume (ml)</label>
@@ -300,6 +266,7 @@
             </div>
         </div>
         
+        <!-- PACK 3 -->
         <div class="pack-form">
             <div class="campo">
                 <label>Pack 3: Quantidade</label>
@@ -311,7 +278,9 @@
                     <option value="16">16 unidades</option>
                     <option value="18">18 unidades</option>
                     <option value="24">24 unidades</option>
+                    <option value="outro">Outro...</option>
                 </select>
+                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display: none; margin-top: 5px;">
             </div>
             <div class="campo">
                 <label>Volume (ml)</label>
@@ -357,10 +326,19 @@
             const resultados = [];
             
             packForms.forEach((form, index) => {
-                const quantidade = parseFloat(form.querySelector(".quantidade-input").value);
+                // QUANTIDADE
+                const quantidadeSelect = form.querySelector(".quantidade-input");
+                let quantidade;
+                if (quantidadeSelect.value === 'outro') {
+                    const customQtdInput = form.querySelector(".quantidade-custom-input");
+                    quantidade = parseFloat(customQtdInput.value);
+                } else {
+                    quantidade = parseFloat(quantidadeSelect.value);
+                }
+
+                // VOLUME
                 const volumeSelect = form.querySelector(".volume-input");
                 let volume;
-
                 if (volumeSelect.value === 'outro') {
                     const customVolumeInput = form.querySelector(".volume-custom-input");
                     volume = parseFloat(customVolumeInput.value);
@@ -370,7 +348,7 @@
 
                 const precoUnidade = parseFloat(form.querySelector(".preco-input").value);
 
-                if (isNaN(precoUnidade) || precoUnidade <= 0 || isNaN(volume) || volume <= 0) {
+                if (isNaN(precoUnidade) || precoUnidade <= 0 || isNaN(volume) || volume <= 0 || isNaN(quantidade) || quantidade <= 0) {
                     resultados.push({ pack: `Pack ${index + 1}`, precoPorLitro: "Inválido", valorTotal: "Inválido" });
                     return;
                 }
@@ -411,10 +389,10 @@
             });
         }
 
-        // Adiciona os listeners para os seletores de volume
+        // Listeners para volume
         document.querySelectorAll('.volume-input').forEach(selectElement => {
             selectElement.addEventListener('change', (event) => {
-                const form = event.target.closest('.pack-form');
+                const form = event.target.closest('.campo');
                 const customInput = form.querySelector('.volume-custom-input');
                 if (event.target.value === 'outro') {
                     customInput.style.display = 'block';
@@ -425,7 +403,21 @@
             });
         });
 
-        // Chama o cálculo inicial ao carregar a página
+        // Listeners para quantidade
+        document.querySelectorAll('.quantidade-input').forEach(selectElement => {
+            selectElement.addEventListener('change', (event) => {
+                const form = event.target.closest('.campo');
+                const customInput = form.querySelector('.quantidade-custom-input');
+                if (event.target.value === 'outro') {
+                    customInput.style.display = 'block';
+                    customInput.focus();
+                } else {
+                    customInput.style.display = 'none';
+                }
+            });
+        });
+
+        // Chama o cálculo inicial ao carregar
         window.onload = calcular;
     </script>
 </body>
