@@ -194,7 +194,6 @@
         <h1>Calcula a Breja</h1>
         <h2>Comparador de Preço por Pack</h2>
 
-        <!-- Pack 1 -->
         <div class="pack-form">
             <div class="campo">
                 <label>Pack 1: Quantidade</label>
@@ -230,7 +229,6 @@
             </div>
         </div>
 
-        <!-- Pack 2 -->
         <div class="pack-form">
             <div class="campo">
                 <label>Pack 2: Quantidade</label>
@@ -266,7 +264,6 @@
             </div>
         </div>
         
-        <!-- Pack 3 -->
         <div class="pack-form">
             <div class="campo">
                 <label>Pack 3: Quantidade</label>
@@ -392,7 +389,7 @@
         // listener para quantidade
         document.querySelectorAll('.quantidade-input').forEach(selectElement => {
             selectElement.addEventListener('change', (event) => {
-                const form = event.target.closest('.campo');
+                const form = event.target.closest('.pack-form'); // LINHA CORRIGIDA
                 const customInput = form.querySelector('.quantidade-custom-input');
                 if (event.target.value === 'outro') {
                     customInput.style.display = 'block';
