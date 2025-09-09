@@ -1,197 +1,314 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Cerveja por Litro</title>
+    <title>Calcula a Breja - Pack's</title>
     <style>
+        :root {
+            --primary-color: #ff9800;
+            --secondary-color: #2e7d32;
+            --text-color: #333;
+            --bg-color: #f4f4f4;
+            --light-text: #ffffff;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            background: #f8f9fa;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .container {
+            background-image: url(fundo.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-color);
+            padding-top: 80px;
         }
-        .formulario {
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-        .formulario h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            text-align: center;
-            color: #444;
-        }
-        .campo {
-            margin-bottom: 12px;
-        }
-        .campo label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 4px;
-            color: #555;
-        }
-        .campo input, .campo select {
+
+        .navbar {
             width: 100%;
-            padding: 8px;
+            background-color: rgba(51, 51, 51, 0.9);
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .navbar a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar a:hover, .navbar a.active {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 0 15px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pack-form {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+            flex-grow: 1;
+        }
+
+        .campo label {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        select, input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
         }
-        .resultado {
-            font-weight: bold;
-            color: #006400;
-            text-align: center;
-            margin-top: 10px;
-        }
-        .melhor-opcao {
-            margin-top: 20px;
-            text-align: center;
+        
+        button {
+            padding: 12px 25px;
             font-size: 18px;
             font-weight: bold;
-            color: #d9534f;
+            cursor: pointer;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1e5e2f;
+        }
+
+        table {
+            margin: 30px auto 0;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: var(--light-text);
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #e9e9e9;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: auto;
+            font-size: 14px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 0;
+            width: 100%;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>🍻 Calculadora de Cerveja por Litro</h1>
-
-    <div class="container">
-        <!-- Pack 1 -->
-        <div class="formulario" id="pack1">
-            <h2>Pack 1</h2>
-            <div class="campo">
-                <label>Preço (R$)</label>
-                <input type="number" class="preco" step="0.01" placeholder="Ex: 39.90">
-            </div>
-            <div class="campo">
-                <label>Volume (ml)</label>
-                <select class="volume-input">
-                    <option value="269">269 ml</option>
-                    <option value="300">330 ml</option>
-                    <option value="350">350 ml</option>
-                    <option value="473">473 ml</option>
-                    <option value="550">550 ml</option>
-                    <option value="600">600 ml</option>
-                    <option value="1000">1 litro</option>
-                    <option value="outro">Outro...</option>
-                </select>
-                <input type="number" class="volume-custom-input" placeholder="Digite o volume em ml" style="display: none; margin-top: 5px;">
-            </div>
-            <div class="campo">
-                <label>Quantidade</label>
-                <select class="quantidade-input">
-                    <option value="6">6 unidades</option>
-                    <option value="8">8 unidades</option>
-                    <option value="12" selected>12 unidades</option>
-                    <option value="15">15 unidades</option>
-                    <option value="16">16 unidades</option>
-                    <option value="18">18 unidades</option>
-                    <option value="24">24 unidades</option>
-                    <option value="outro">Outro...</option>
-                </select>
-                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display: none; margin-top: 5px;">
-            </div>
-            <div class="resultado"></div>
-        </div>
-
-        <!-- Pack 2 -->
-        <div class="formulario" id="pack2">
-            <h2>Pack 2</h2>
-            <div class="campo">
-                <label>Preço (R$)</label>
-                <input type="number" class="preco" step="0.01" placeholder="Ex: 39.90">
-            </div>
-            <div class="campo">
-                <label>Volume (ml)</label>
-                <select class="volume-input">
-                    <option value="269">269 ml</option>
-                    <option value="300">330 ml</option>
-                    <option value="350">350 ml</option>
-                    <option value="473">473 ml</option>
-                    <option value="550">550 ml</option>
-                    <option value="600">600 ml</option>
-                    <option value="1000">1 litro</option>
-                    <option value="outro">Outro...</option>
-                </select>
-                <input type="number" class="volume-custom-input" placeholder="Digite o volume em ml" style="display: none; margin-top: 5px;">
-            </div>
-            <div class="campo">
-                <label>Quantidade</label>
-                <select class="quantidade-input">
-                    <option value="6">6 unidades</option>
-                    <option value="8">8 unidades</option>
-                    <option value="12" selected>12 unidades</option>
-                    <option value="15">15 unidades</option>
-                    <option value="16">16 unidades</option>
-                    <option value="18">18 unidades</option>
-                    <option value="24">24 unidades</option>
-                    <option value="outro">Outro...</option>
-                </select>
-                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display: none; margin-top: 5px;">
-            </div>
-            <div class="resultado"></div>
-        </div>
-
-        <!-- Pack 3 -->
-        <div class="formulario" id="pack3">
-            <h2>Pack 3</h2>
-            <div class="campo">
-                <label>Preço (R$)</label>
-                <input type="number" class="preco" step="0.01" placeholder="Ex: 39.90">
-            </div>
-            <div class="campo">
-                <label>Volume (ml)</label>
-                <select class="volume-input">
-                    <option value="269">269 ml</option>
-                    <option value="300">350 ml</option>
-                    <option value="350">350 ml</option>
-                    <option value="473">473 ml</option>
-                    <option value="550">550 ml</option>
-                    <option value="600">600 ml</option>
-                    <option value="1000">1 litro</option>
-                    <option value="outro">Outro...</option>
-                </select>
-                <input type="number" class="volume-custom-input" placeholder="Digite o volume em ml" style="display: none; margin-top: 5px;">
-            </div>
-            <div class="campo">
-                <label>Quantidade</label>
-                <select class="quantidade-input">
-                    <option value="6">6 unidades</option>
-                    <option value="8">8 unidades</option>
-                    <option value="12" selected>12 unidades</option>
-                    <option value="15">15 unidades</option>
-                    <option value="16">16 unidades</option>
-                    <option value="18">18 unidades</option>
-                    <option value="24">24 unidades</option>
-                    <option value="outro">Outro...</option>
-                </select>
-                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display: none; margin-top: 5px;">
-            </div>
-            <div class="resultado"></div>
-        </div>
+    <div class="navbar">
+        <a href="index.html">Unidade</a>
+        <a href="Packs.html" class="active">Pack's</a>
     </div>
 
-    <div class="melhor-opcao" id="melhorOpcao"></div>
+    <div class="container">
+        <h1>Calcula a Breja</h1>
+        <h2>Comparador de Preço por Pack</h2>
+
+        <!-- PACKS -->
+        <div class="pack-form">
+            <div class="campo">
+                <label>Pack 1: Quantidade</label>
+                <select class="quantidade-input">
+                    <option value="6">6 unidades</option>
+                    <option value="8">8 unidades</option>
+                    <option value="12" selected>12 unidades</option>
+                    <option value="15">15 unidades</option>
+                    <option value="16">16 unidades</option>
+                    <option value="18">18 unidades</option>
+                    <option value="24">24 unidades</option>
+                    <option value="outro">Outro...</option>
+                </select>
+                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display:none; margin-top:5px;">
+            </div>
+            <div class="campo">
+                <label>Volume (ml)</label>
+                <select class="volume-input">
+                    <option value="269">269 ml</option>
+                    <option value="300">300 ml</option>
+                    <option value="350" selected>350 ml</option>
+                    <option value="473">473 ml</option>
+                    <option value="550">550 ml</option>
+                    <option value="600">600 ml</option>
+                    <option value="1000">1 L</option>
+                    <option value="outro">Outro...</option>
+                </select>
+                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display:none; margin-top:5px;">
+            </div>
+            <div class="campo">
+                <label>Preço por Unidade (R$)</label>
+                <input type="number" class="preco-input" placeholder="Ex: 2.99">
+            </div>
+        </div>
+
+        <div class="pack-form">
+            <div class="campo">
+                <label>Pack 2: Quantidade</label>
+                <select class="quantidade-input">
+                    <option value="6">6 unidades</option>
+                    <option value="8">8 unidades</option>
+                    <option value="12" selected>12 unidades</option>
+                    <option value="15">15 unidades</option>
+                    <option value="16">16 unidades</option>
+                    <option value="18">18 unidades</option>
+                    <option value="24">24 unidades</option>
+                    <option value="outro">Outro...</option>
+                </select>
+                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display:none; margin-top:5px;">
+            </div>
+            <div class="campo">
+                <label>Volume (ml)</label>
+                <select class="volume-input">
+                    <option value="269">269 ml</option>
+                    <option value="300">300 ml</option>
+                    <option value="350" selected>350 ml</option>
+                    <option value="473">473 ml</option>
+                    <option value="550">550 ml</option>
+                    <option value="600">600 ml</option>
+                    <option value="1000">1 L</option>
+                    <option value="outro">Outro...</option>
+                </select>
+                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display:none; margin-top:5px;">
+            </div>
+            <div class="campo">
+                <label>Preço por Unidade (R$)</label>
+                <input type="number" class="preco-input" placeholder="Ex: 3.20">
+            </div>
+        </div>
+
+        <div class="pack-form">
+            <div class="campo">
+                <label>Pack 3: Quantidade</label>
+                <select class="quantidade-input">
+                    <option value="6">6 unidades</option>
+                    <option value="8">8 unidades</option>
+                    <option value="12" selected>12 unidades</option>
+                    <option value="15">15 unidades</option>
+                    <option value="16">16 unidades</option>
+                    <option value="18">18 unidades</option>
+                    <option value="24">24 unidades</option>
+                    <option value="outro">Outro...</option>
+                </select>
+                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display:none; margin-top:5px;">
+            </div>
+            <div class="campo">
+                <label>Volume (ml)</label>
+                <select class="volume-input">
+                    <option value="269">269 ml</option>
+                    <option value="300">300 ml</option>
+                    <option value="350" selected>350 ml</option>
+                    <option value="473">473 ml</option>
+                    <option value="550">550 ml</option>
+                    <option value="600">600 ml</option>
+                    <option value="1000">1 L</option>
+                    <option value="outro">Outro...</option>
+                </select>
+                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display:none; margin-top:5px;">
+            </div>
+            <div class="campo">
+                <label>Preço por Unidade (R$)</label>
+                <input type="number" class="preco-input" placeholder="Ex: 2.85">
+            </div>
+        </div>
+
+        <button onclick="calcular()">Calcular</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Pack</th>
+                    <th>Preço por Litro (R$)</th>
+                    <th>Valor Pack (R$)</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-resultados"></tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>Idealizado por Juliene Sales e desenvolvido por Yuri Monzini</p>
+    </footer>
 
     <script>
         function calcular() {
-            const packs = document.querySelectorAll('.formulario');
-            let resultados = [];
-
-            packs.forEach((form, index) => {
-                const preco = parseFloat(form.querySelector(".preco").value);
+            const packForms = document.querySelectorAll(".pack-form");
+            const resultados = [];
+            
+            packForms.forEach((form, index) => {
+                // Quantidade
+                const quantidadeSelect = form.querySelector(".quantidade-input");
+                let quantidade = parseFloat(quantidadeSelect.value);
+                if (quantidadeSelect.value === 'outro') {
+                    const customQuantidadeInput = form.querySelector(".quantidade-custom-input");
+                    quantidade = parseFloat(customQuantidadeInput.value);
+                }
 
                 // Volume
                 const volumeSelect = form.querySelector(".volume-input");
@@ -203,45 +320,54 @@
                     volume = parseFloat(volumeSelect.value);
                 }
 
-                // Quantidade
-                const quantidadeSelect = form.querySelector(".quantidade-input");
-                let quantidade;
-                if (quantidadeSelect.value === 'outro') {
-                    const customQtdInput = form.querySelector(".quantidade-custom-input");
-                    quantidade = parseFloat(customQtdInput.value);
-                } else {
-                    quantidade = parseFloat(quantidadeSelect.value);
-                }
+                // Preço
+                const precoUnidade = parseFloat(form.querySelector(".preco-input").value);
 
-                if (!isNaN(preco) && !isNaN(volume) && !isNaN(quantidade)) {
-                    const litrosTotais = (volume * quantidade) / 1000;
-                    const precoPorLitro = preco / litrosTotais;
-                    resultados.push({ pack: index + 1, precoPorLitro });
-                    form.querySelector(".resultado").innerHTML =
-                        `💰 R$ ${precoPorLitro.toFixed(2)} / litro`;
-                } else {
-                    form.querySelector(".resultado").innerHTML = "";
+                if (isNaN(precoUnidade) || precoUnidade <= 0 || isNaN(volume) || volume <= 0 || isNaN(quantidade) || quantidade <= 0) {
+                    resultados.push({ pack: `Pack ${index + 1}`, precoPorLitro: "Inválido", valorTotal: "Inválido" });
+                    return;
                 }
+                
+                const precoPorLitro = (precoUnidade / volume) * 1000;
+                const valorTotal = precoUnidade * quantidade;
+                
+                resultados.push({
+                    pack: `Pack ${index + 1}`,
+                    precoPorLitro: precoPorLitro,
+                    valorTotal: valorTotal
+                });
             });
 
-            if (resultados.length > 0) {
-                const melhor = resultados.reduce((min, p) => p.precoPorLitro < min.precoPorLitro ? p : min);
-                document.getElementById("melhorOpcao").innerHTML =
-                    `👉 Melhor opção: <b>Pack ${melhor.pack}</b> (R$ ${melhor.precoPorLitro.toFixed(2)} / litro)`;
-            } else {
-                document.getElementById("melhorOpcao").innerHTML = "";
-            }
+            const precosValidos = resultados
+                .filter(r => typeof r.precoPorLitro === "number")
+                .map(r => r.precoPorLitro);
+            
+            const menorPreco = precosValidos.length > 0 ? Math.min(...precosValidos) : Infinity;
+
+            const tabelaBody = document.getElementById("tabela-resultados");
+            tabelaBody.innerHTML = "";
+
+            resultados.forEach(resultado => {
+                const row = document.createElement("tr");
+                const isHighlight = typeof resultado.precoPorLitro === "number" && resultado.precoPorLitro.toFixed(2) === menorPreco.toFixed(2);
+                
+                if (isHighlight && menorPreco !== Infinity) {
+                    row.classList.add("highlight");
+                }
+
+                row.innerHTML = `
+                    <td data-label="Pack">${resultado.pack}</td>
+                    <td data-label="Preço por Litro">${typeof resultado.precoPorLitro === "number" ? `R$ ${resultado.precoPorLitro.toFixed(2)}` : resultado.precoPorLitro}</td>
+                    <td data-label="Valor do Pack">${typeof resultado.valorTotal === "number" ? `R$ ${resultado.valorTotal.toFixed(2)}` : resultado.valorTotal}</td>
+                `;
+                tabelaBody.appendChild(row);
+            });
         }
 
-        document.querySelectorAll("input, select").forEach(el => {
-            el.addEventListener("input", calcular);
-            el.addEventListener("change", calcular);
-        });
-
-        // Volume customizado
+        // Listeners para volume
         document.querySelectorAll('.volume-input').forEach(selectElement => {
             selectElement.addEventListener('change', (event) => {
-                const form = event.target.closest('.campo');
+                const form = event.target.closest('.pack-form');
                 const customInput = form.querySelector('.volume-custom-input');
                 if (event.target.value === 'outro') {
                     customInput.style.display = 'block';
@@ -252,10 +378,10 @@
             });
         });
 
-        // Quantidade customizada
+        // Listeners para quantidade
         document.querySelectorAll('.quantidade-input').forEach(selectElement => {
             selectElement.addEventListener('change', (event) => {
-                const form = event.target.closest('.campo');
+                const form = event.target.closest('.pack-form');
                 const customInput = form.querySelector('.quantidade-custom-input');
                 if (event.target.value === 'outro') {
                     customInput.style.display = 'block';
@@ -265,6 +391,9 @@
                 }
             });
         });
+
+        // Calcular ao carregar
+        window.onload = calcular;
     </script>
 </body>
 </html>
