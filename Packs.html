@@ -6,15 +6,15 @@
     <title>Calcula a Breja - Pack's</title>
     <style>
         :root {
-            --primary-color: #ff9800;
-            --secondary-color: #2e7d32;
+            --primary-color: #ff9800; /* Laranja */
+            --secondary-color: #2e7d32; /* Verde mais escuro */
             --text-color: #333;
             --bg-color: #f4f4f4;
             --light-text: #ffffff;
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-image: url(fundo.jpg);
             background-size: cover;
             background-attachment: fixed;
@@ -26,12 +26,13 @@
             min-height: 100vh;
             margin: 0;
             color: var(--text-color);
-            padding-top: 80px;
+            padding-top: 80px; /* Espaço para a navbar fixa */
         }
 
         .navbar {
             width: 100%;
             background-color: rgba(51, 51, 51, 0.9);
+            backdrop-filter: blur(5px);
             display: flex;
             justify-content: center;
             padding: 10px 0;
@@ -63,6 +64,7 @@
             max-width: 800px;
             padding: 20px;
             background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             margin: 0 15px;
@@ -107,7 +109,7 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             width: 100%;
-            box-sizing: border-box;
+            box-sizing: border-box; /* Garante que padding não afete a largura total */
         }
         
         button {
@@ -152,13 +154,73 @@
         }
 
         footer {
-            margin-top: auto;
+            margin-top: auto; /* Empurra o rodapé para baixo */
             font-size: 14px;
             color: white;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 15px 0;
             width: 100%;
             text-align: center;
+        }
+
+        /* --- Media Query para Responsividade --- */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px; /* Ajuste para navbar */
+            }
+
+            .container {
+                margin: 0 10px;
+                padding: 15px;
+            }
+            
+            .pack-form {
+                flex-direction: column;
+                align-items: stretch; /* Faz os itens ocuparem a largura toda */
+            }
+            
+            .campo {
+                width: 100%;
+            }
+            
+            /* A SEÇÃO ABAIXO FOI REMOVIDA PARA CORRIGIR A TABELA NO CELULAR.
+               Ela transformava a tabela em "cards", mas escondia os dados.
+               Agora, a tabela normal será usada, que se adapta melhor.
+            */
+            /* table thead {
+                display: none;
+            }
+
+            table, tbody, tr, td {
+                display: block;
+                width: 100%;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                overflow: hidden;
+            }
+            
+            td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+                border: none;
+                border-bottom: 1px solid #eee;
+            }
+            
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: calc(50% - 20px);
+                padding-right: 10px;
+                text-align: left;
+                font-weight: bold;
+            }
+            */
         }
     </style>
 </head>
@@ -172,7 +234,6 @@
         <h1>Calcula a Breja</h1>
         <h2>Comparador de Preço por Pack</h2>
 
-        <!-- PACKS -->
         <div class="pack-form">
             <div class="campo">
                 <label>Pack 1: Quantidade</label>
@@ -184,9 +245,7 @@
                     <option value="16">16 unidades</option>
                     <option value="18">18 unidades</option>
                     <option value="24">24 unidades</option>
-                    <option value="outro">Outro...</option>
                 </select>
-                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display:none; margin-top:5px;">
             </div>
             <div class="campo">
                 <label>Volume (ml)</label>
@@ -200,7 +259,7 @@
                     <option value="1000">1 L</option>
                     <option value="outro">Outro...</option>
                 </select>
-                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display:none; margin-top:5px;">
+                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display: none; margin-top: 5px;">
             </div>
             <div class="campo">
                 <label>Preço por Unidade (R$)</label>
@@ -219,9 +278,7 @@
                     <option value="16">16 unidades</option>
                     <option value="18">18 unidades</option>
                     <option value="24">24 unidades</option>
-                    <option value="outro">Outro...</option>
                 </select>
-                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display:none; margin-top:5px;">
             </div>
             <div class="campo">
                 <label>Volume (ml)</label>
@@ -235,14 +292,14 @@
                     <option value="1000">1 L</option>
                     <option value="outro">Outro...</option>
                 </select>
-                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display:none; margin-top:5px;">
+                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display: none; margin-top: 5px;">
             </div>
             <div class="campo">
                 <label>Preço por Unidade (R$)</label>
                 <input type="number" class="preco-input" placeholder="Ex: 3.20">
             </div>
         </div>
-
+        
         <div class="pack-form">
             <div class="campo">
                 <label>Pack 3: Quantidade</label>
@@ -254,9 +311,7 @@
                     <option value="16">16 unidades</option>
                     <option value="18">18 unidades</option>
                     <option value="24">24 unidades</option>
-                    <option value="outro">Outro...</option>
                 </select>
-                <input type="number" class="quantidade-custom-input" placeholder="Quantidade" style="display:none; margin-top:5px;">
             </div>
             <div class="campo">
                 <label>Volume (ml)</label>
@@ -270,7 +325,7 @@
                     <option value="1000">1 L</option>
                     <option value="outro">Outro...</option>
                 </select>
-                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display:none; margin-top:5px;">
+                <input type="number" class="volume-custom-input" placeholder="Volume (ml)" style="display: none; margin-top: 5px;">
             </div>
             <div class="campo">
                 <label>Preço por Unidade (R$)</label>
@@ -302,17 +357,10 @@
             const resultados = [];
             
             packForms.forEach((form, index) => {
-                // Quantidade
-                const quantidadeSelect = form.querySelector(".quantidade-input");
-                let quantidade = parseFloat(quantidadeSelect.value);
-                if (quantidadeSelect.value === 'outro') {
-                    const customQuantidadeInput = form.querySelector(".quantidade-custom-input");
-                    quantidade = parseFloat(customQuantidadeInput.value);
-                }
-
-                // Volume
+                const quantidade = parseFloat(form.querySelector(".quantidade-input").value);
                 const volumeSelect = form.querySelector(".volume-input");
                 let volume;
+
                 if (volumeSelect.value === 'outro') {
                     const customVolumeInput = form.querySelector(".volume-custom-input");
                     volume = parseFloat(customVolumeInput.value);
@@ -320,10 +368,9 @@
                     volume = parseFloat(volumeSelect.value);
                 }
 
-                // Preço
                 const precoUnidade = parseFloat(form.querySelector(".preco-input").value);
 
-                if (isNaN(precoUnidade) || precoUnidade <= 0 || isNaN(volume) || volume <= 0 || isNaN(quantidade) || quantidade <= 0) {
+                if (isNaN(precoUnidade) || precoUnidade <= 0 || isNaN(volume) || volume <= 0) {
                     resultados.push({ pack: `Pack ${index + 1}`, precoPorLitro: "Inválido", valorTotal: "Inválido" });
                     return;
                 }
@@ -364,7 +411,7 @@
             });
         }
 
-        // Listeners para volume
+        // Adiciona os listeners para os seletores de volume
         document.querySelectorAll('.volume-input').forEach(selectElement => {
             selectElement.addEventListener('change', (event) => {
                 const form = event.target.closest('.pack-form');
@@ -378,21 +425,7 @@
             });
         });
 
-        // Listeners para quantidade
-        document.querySelectorAll('.quantidade-input').forEach(selectElement => {
-            selectElement.addEventListener('change', (event) => {
-                const form = event.target.closest('.pack-form');
-                const customInput = form.querySelector('.quantidade-custom-input');
-                if (event.target.value === 'outro') {
-                    customInput.style.display = 'block';
-                    customInput.focus();
-                } else {
-                    customInput.style.display = 'none';
-                }
-            });
-        });
-
-        // Calcular ao carregar
+        // Chama o cálculo inicial ao carregar a página
         window.onload = calcular;
     </script>
 </body>
